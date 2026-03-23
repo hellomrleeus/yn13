@@ -92,6 +92,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .welcome { text-align: center; padding: 60px 20px; color: #999; }
 .welcome h2 { font-size: 22px; color: #667eea; margin-bottom: 12px; }
 .welcome p { font-size: 15px; line-height: 1.8; }
+.essay-desc { background: #f8f9ff; border-left: 4px solid #667eea; padding: 12px 16px; margin: 12px 0; font-size: 14px; color: #555; line-height: 1.6; border-radius: 0 8px 8px 0; text-align: left; }
 
 /* History panel */
 .history-toggle { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; font-size: 22px; cursor: pointer; box-shadow: 0 4px 12px rgba(102,126,234,0.4); z-index: 200; display: flex; align-items: center; justify-content: center; }
@@ -167,6 +168,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 const essays = [
   {
     id: 1, title: "1. Lost Bag",
+    desc: "You and your friends had dinner at a restaurant yesterday. You think you left a bag at the restaurant...",
     lines: [
       "Dear Manager,",
       "I hope you're doing well. I'm writing to ask if I may have left a bag at your restaurant yesterday evening.",
@@ -180,6 +182,7 @@ const essays = [
   },
   {
     id: 2, title: "2. Vacation Request",
+    desc: "You need to take a vacation for 2 weeks and your manager Dani wants you to send her an email...",
     lines: [
       "Hi Dani,",
       "I hope you're doing well. I'm writing to request a two-week vacation.",
@@ -193,6 +196,7 @@ const essays = [
   },
   {
     id: 3, title: "3. Furniture (拒绝)",
+    desc: "Your friend Jim is moving furniture at the weekend...",
     lines: [
       "Dear Jim,",
       "I hope you're doing well. I'm writing to let you know that I won't be able to help you move furniture this weekend.",
@@ -206,6 +210,7 @@ const essays = [
   },
   {
     id: 4, title: "4. Furniture 2",
+    desc: "You have been asked by your friend for some help in moving the furniture...",
     lines: [
       "Dear Jim,",
       "I hope you're doing well. I'm writing to let you know I won't be able to help you move furniture this weekend, and I really appreciate you asking.",
@@ -219,6 +224,7 @@ const essays = [
   },
   {
     id: 5, title: "5. Susan Movie",
+    desc: "Write an email to Ms. Susan regarding her invitation to go out for a movie...",
     lines: [
       "Hi Ms. Susan,",
       "I hope you're doing well. I'm writing to thank you for inviting me to the movie. It was very kind of you to think of me.",
@@ -231,6 +237,7 @@ const essays = [
   },
   {
     id: 6, title: "6. Apartment Light",
+    desc: "You live on the second floor of an apartment building with no elevator...",
     lines: [
       "Dear Manager,",
       "I hope you're doing well. I'm writing to report a lighting issue in the building.",
@@ -244,6 +251,7 @@ const essays = [
   },
   {
     id: 7, title: "7. Neighbor Issue",
+    desc: "You are renting an apartment, but there are some problems with it...",
     lines: [
       "Dear Marvin,",
       "I hope you're doing well. I'm writing to report a couple of issues in the apartment.",
@@ -257,6 +265,7 @@ const essays = [
   },
   {
     id: 8, title: "8. Sport Club",
+    desc: "You are a member of a sports club and you are writing to the club manager Mrs. Singh...",
     lines: [
       "Dear Mrs. Singh,",
       "I hope you're doing well. I'm writing to share a few ideas for our club party.",
@@ -271,6 +280,7 @@ const essays = [
   },
   {
     id: 9, title: "9. Saving Energy",
+    desc: "Your company is trying to save energy, and you want to write an e-mail to make some suggestions...",
     lines: [
       "Dear Mrs. Smith,",
       "I hope you're doing well. I'm writing to share a few ideas that may help the company save energy.",
@@ -284,6 +294,7 @@ const essays = [
   },
   {
     id: 10, title: "10. Neighbor Issue 2",
+    desc: "Write an email to your new neighbor John to resolve some of his problems...",
     lines: [
       "Dear John,",
       "I hope you're doing well. I'm writing to mention a few small things to help us live more comfortably in the building.",
@@ -297,6 +308,7 @@ const essays = [
   },
   {
     id: 11, title: "11. Presentation",
+    desc: "You're going to give a presentation in the company of your friend Jim...",
     lines: [
       "Dear Jim,",
       "I hope you're doing well. I'm writing to ask a few questions about the upcoming presentation at your company, as I'm not very familiar with the venue and would like to be well prepared.",
@@ -310,6 +322,7 @@ const essays = [
   },
   {
     id: 12, title: "12. Reservation",
+    desc: "You are writing to ask restaurant manager if you can reserve a table...",
     lines: [
       "Dear Manager,",
       "I hope you're doing well. I'm writing to ask if it is possible to reserve a table at your restaurant next Friday evening for a birthday party.",
@@ -323,6 +336,7 @@ const essays = [
   },
   {
     id: 13, title: "13. Alex's Invitation",
+    desc: "It is your son Alex's birthday next month. You are writing an email to invite all classmates...",
     lines: [
       "Hi Parents,",
       "I hope you're doing well. I'm writing to invite your children to Alex's birthday party.",
@@ -420,6 +434,7 @@ function selectEssay(id) {
   document.getElementById('exerciseArea').innerHTML = `
     <div class="welcome">
       <h2>${currentEssay.title}</h2>
+      <div class="essay-desc">${currentEssay.desc}</div>
       <p>请选择练习模式</p>
     </div>`;
 }
@@ -484,6 +499,7 @@ function renderFillBlank(mode) {
   let blankId = 0;
 
   let html = `<h2>${currentEssay.title} - ${modeNames[mode]}</h2>`;
+  html += `<div class="essay-desc">${currentEssay.desc}</div>`;
   html += `<p class="subtitle">在空格中填入正确的单词，按 Tab 跳转下一个空</p>`;
   html += `<div class="essay-text">`;
 
@@ -590,6 +606,7 @@ function renderDictation() {
 
   area.innerHTML = `
     <h2>${currentEssay.title} - 全文默写</h2>
+    <div class="essay-desc">${currentEssay.desc}</div>
     <p class="subtitle">凭记忆写出全文，完成后点击"检查"对比差异</p>
     <div class="dictation-area">
       <textarea id="dictInput" placeholder="在此输入全文..."></textarea>
